@@ -4,20 +4,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t gyurikol/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t gyuri/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true gyurikol/react-test npm test
+  - docker run -e CI=true gyuri/react-test npm test
 
 after_success:
-  - docker build -t gyurikol/multi-client ./client
-  - docker build -t gyurikol/multi-nginx ./nginx
-  - docker build -t gyurikol/multi-server ./server
-  - docker build -t gyurikol/multi-worker ./worker
+  - docker build -t gyuri/multi-client ./client
+  - docker build -t gyuri/multi-nginx ./nginx
+  - docker build -t gyuri/multi-server ./server
+  - docker build -t gyuri/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push gyurikol/multi-client
-  - docker push gyurikol/multi-nginx
-  - docker push gyurikol/multi-server
-  - docker push gyurikol/multi-worker
+  - docker push gyuri/multi-client
+  - docker push gyuri/multi-nginx
+  - docker push gyuri/multi-server
+  - docker push gyuri/multi-worker
